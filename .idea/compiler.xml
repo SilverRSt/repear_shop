@@ -10,5 +10,9 @@
         <module name="repear_shop.repear_shop.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="repear_shop.repear_shop.main~1" target="17" />
+      <module name="repear_shop.repear_shop.test~1" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
