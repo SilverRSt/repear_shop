@@ -21,17 +21,17 @@ public class BrandController {
     }
 
     @PostMapping
-    public Brand createBrand(Brand brand){
+    public Brand createBrand(@RequestBody Brand brand){
         return this.service.createBrand(brand);
     }
 
     @PutMapping("/{brandName}")
-    public Brand updateBrand(String brandName, Brand brand){
+    public Brand updateBrand(@PathVariable String brandName, @RequestBody Brand brand){
         return this.service.updateBrand(brandName, brand);
     }
 
     @DeleteMapping("/{brandName}")
-    public void deleteBrand(String brandName){
+    public void deleteBrand(@PathVariable String brandName){
         this.service.deleteBrand(brandName);
     }
 }

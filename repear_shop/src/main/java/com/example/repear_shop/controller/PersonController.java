@@ -4,8 +4,8 @@ import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.service.PersonService;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
+
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
