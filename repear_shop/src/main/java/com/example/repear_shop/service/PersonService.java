@@ -13,6 +13,6 @@ public interface PersonService {
 
     void deletePerson(long id);
 
-    //List<Person> getPersonsByName(String name);
+    List<Person> findAllByFirstName(String name);
 
 }

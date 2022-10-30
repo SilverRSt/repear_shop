@@ -36,8 +36,8 @@ public class PersonServiceImpl implements PersonService {
         this.personRepository.deleteById(id);
     }
 
-//    @Override
-//    public List<Person> getPersonsByName(String name) {
-//        return this.personRepository.findAllByName(name);
-//    }
+    @Override
+    public List<Person> findAllByFirstName(String name) {
+        return this.personRepository.findAllByFirstName(name);
+    }
 }

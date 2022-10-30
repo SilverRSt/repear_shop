@@ -35,8 +35,8 @@ public class PersonController {
         this.services.deletePerson(id);
     }
 
-//    @GetMapping("/by-name/{name}")
-//    public List<Person> getPersonsByName(@PathVariable String name) {
-//        return this.services.getPersonsByName(name);
-//    }
+    @GetMapping("/by-name/{name}")
+    public List<Person> findAllByFirstName(@PathVariable String name) {
+        return this.services.findAllByFirstName(name);
+    }
 }
