@@ -1,5 +1,7 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,7 +15,15 @@ public class Model {
     private Brand brand;
 
     @OneToMany(mappedBy = "model")
+    @JsonIgnoreProperties("model")
     private List<MV> mvList;
+
+    public Model() {
+    }
+
+    public Model(String model) {
+        this.model = model;
+    }
 
     public String getModel() {
         return model;
@@ -29,5 +39,13 @@ public class Model {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public List<MV> getMvList() {
+        return mvList;
+    }
+
+    public void setMvList(List<MV> mvList) {
+        this.mvList = mvList;
     }
 }
