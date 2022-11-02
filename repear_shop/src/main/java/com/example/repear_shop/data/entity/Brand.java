@@ -1,5 +1,7 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,7 +11,15 @@ public class Brand {
     private String brand;
 
     @OneToMany(mappedBy = "brand")
+    @JsonIgnoreProperties("brand")
     private List<Model> modelList;
+
+    public Brand() {
+    }
+
+    public Brand(String brand) {
+        this.brand = brand;
+    }
 
     public String getBrand() {
         return brand;

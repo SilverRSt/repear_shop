@@ -1,9 +1,7 @@
 package com.example.repear_shop.data.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Model {
@@ -13,6 +11,9 @@ public class Model {
     @ManyToOne
     @JoinColumn(name = "brand")
     private Brand brand;
+
+    @OneToMany(mappedBy = "model")
+    private List<MV> mvList;
 
     public String getModel() {
         return model;

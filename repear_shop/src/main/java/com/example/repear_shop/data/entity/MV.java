@@ -1,6 +1,7 @@
 package com.example.repear_shop.data.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,10 +14,11 @@ public class MV {
 
     private String ownerId;
 
-    private String model;
+    @ManyToOne
+    @JoinColumn(name = "model")
+    private Model model;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date yearMade;
+    private LocalDate yearMade;
 
     public String getVin() {
         return vin;
@@ -42,19 +44,19 @@ public class MV {
         this.ownerId = ownerId;
     }
 
-    public Date getYearMade() {
+    public LocalDate getYearMade() {
         return yearMade;
     }
 
-    public void setYearMade(Date yearMade) {
+    public void setYearMade(LocalDate yearMade) {
         this.yearMade = yearMade;
     }
 
-    public String getModel() {
+    public Model getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 }
