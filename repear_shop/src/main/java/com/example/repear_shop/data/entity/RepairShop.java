@@ -1,6 +1,9 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class RepairShop {
@@ -12,6 +15,17 @@ public class RepairShop {
     private String name;
 
     private String address;
+
+    @OneToMany(mappedBy = "repairShopId")
+    @JsonIgnoreProperties("repairShopId")
+    private List<Employee> employeeList;
+
+    public RepairShop() {
+    }
+
+    public RepairShop(Long repairShopId) {
+        this.repairShopId = repairShopId;
+    }
 
     //private Brand brandRestriction;
 
@@ -37,5 +51,13 @@ public class RepairShop {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 }
