@@ -2,7 +2,6 @@ package com.example.repear_shop.data.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class MV {
@@ -12,7 +11,9 @@ public class MV {
 
     private String registrationPlate;
 
-    private String ownerId;
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Person id;
 
     @ManyToOne
     @JoinColumn(name = "model")
@@ -36,14 +37,6 @@ public class MV {
         this.registrationPlate = registrationPlate;
     }
 
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public LocalDate getYearMade() {
         return yearMade;
     }
@@ -58,5 +51,13 @@ public class MV {
 
     public void setModel(Model model) {
         this.model = model;
+    }
+
+    public Person getId() {
+        return id;
+    }
+
+    public void setId(Person id) {
+        this.id = id;
     }
 }
