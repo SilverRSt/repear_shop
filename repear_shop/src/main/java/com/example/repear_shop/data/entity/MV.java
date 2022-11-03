@@ -1,5 +1,7 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -12,8 +14,11 @@ public class MV {
     private String registrationPlate;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    private Person id;
+    @JoinColumn(name = "person") //only responsible foe database name
+    private Person person;
+
+//    @ManyToOne
+//    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "model")
@@ -53,11 +58,20 @@ public class MV {
         this.model = model;
     }
 
-    public Person getId() {
-        return id;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setId(Person id) {
-        this.id = id;
+    public void setPerson(Person person) {
+        this.person = person;
     }
+
+
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 }

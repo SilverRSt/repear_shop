@@ -1,6 +1,9 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -17,6 +20,11 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "repair_shop_id")
     private RepairShop repairShopId;
+
+//    @OneToMany(mappedBy = "employee")
+//    //@JsonIgnoreProperties("employee")
+//    @JsonIgnoreProperties({"model", "employee", "brand"})
+//    private List<MV> mvList;
 
     public Person getPersonId() {
         return personId;
@@ -41,4 +49,12 @@ public class Employee {
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
+
+//    public List<MV> getMvList() {
+//        return mvList;
+//    }
+//
+//    public void setMvList(List<MV> mvList) {
+//        this.mvList = mvList;
+//    }
 }

@@ -1,12 +1,13 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties("mvList")
+//@JsonIgnoreProperties("mvList")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,9 @@ public class Person {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "person")
+    @JsonIgnoreProperties({"model", "person", "brand"})
+    //@JsonIgnore
     private List<MV> mvList;
 
     public Person() {
