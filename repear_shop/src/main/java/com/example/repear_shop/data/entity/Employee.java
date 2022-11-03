@@ -46,20 +46,4 @@ public class Employee extends Person{
     public void setRepairShopId(RepairShop repairShopId) {
         this.repairShopId = repairShopId;
     }
-
-//    public Long getEmployeeId() {
-//        return employeeId;
-//    }
-//
-//    public void setEmployeeId(Long employeeId) {
-//        this.employeeId = employeeId;
-//    }
-
-//    public List<MV> getMvList() {
-//        return mvList;
-//    }
-//
-//    public void setMvList(List<MV> mvList) {
-//        this.mvList = mvList;
-//    }
 }
