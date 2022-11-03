@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-//@JsonIgnoreProperties("mvList")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,6 @@ public class Person {
 
     @OneToMany(mappedBy = "person")
     @JsonIgnoreProperties({"model", "person", "brand"})
-    //@JsonIgnore
     private List<MV> mvList;
 
     public Person() {

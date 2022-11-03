@@ -6,16 +6,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeId;
+@PrimaryKeyJoinColumn(name = "employee_id")
+public class Employee extends Person{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long employeeId;
 
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    //@MapsId
-    private Person personId;
+//    @OneToOne
+//    @JoinColumn(name = "id")
+//    @MapsId
+//    private Person personId;
 
     @ManyToOne
     @JoinColumn(name = "repair_shop_id")
@@ -26,29 +27,33 @@ public class Employee {
 //    @JsonIgnoreProperties({"model", "employee", "brand"})
 //    private List<MV> mvList;
 
-    public Person getPersonId() {
-        return personId;
-    }
+//    public Person getPersonId() {
+//        return personId;
+//    }
 
 
     public Employee() {
     }
 
-    public Employee(Long employee_id) {
-        this.employeeId = employee_id;
-    }
+//    public Employee(Long employee_id) {
+//        this.employeeId = employee_id;
+//    }
 
     public RepairShop getRepairShopId() {
         return repairShopId;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public void setRepairShopId(RepairShop repairShopId) {
+        this.repairShopId = repairShopId;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
-    }
+//    public Long getEmployeeId() {
+//        return employeeId;
+//    }
+//
+//    public void setEmployeeId(Long employeeId) {
+//        this.employeeId = employeeId;
+//    }
 
 //    public List<MV> getMvList() {
 //        return mvList;
