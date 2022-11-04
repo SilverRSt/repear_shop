@@ -22,6 +22,11 @@ public class Employee extends Person{
     @JoinColumn(name = "repair_shop_id")
     private RepairShop repairShopId;
 
+    @OneToMany(mappedBy = "employeeId")
+    //@JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
+    @JsonIgnoreProperties({"employeeId"})
+    private List<Visit> visitList;
+
 //    @OneToMany(mappedBy = "employee")
 //    //@JsonIgnoreProperties("employee")
 //    @JsonIgnoreProperties({"model", "employee", "brand"})
@@ -39,11 +44,24 @@ public class Employee extends Person{
 //        this.employeeId = employee_id;
 //    }
 
+
+    public Employee(long id) {
+        super(id);
+    }
+
     public RepairShop getRepairShopId() {
         return repairShopId;
     }
 
     public void setRepairShopId(RepairShop repairShopId) {
         this.repairShopId = repairShopId;
+    }
+
+    public List<Visit> getVisitList() {
+        return visitList;
+    }
+
+    public void setVisitList(List<Visit> visitList) {
+        this.visitList = visitList;
     }
 }
