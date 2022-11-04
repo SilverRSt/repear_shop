@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class MV {
@@ -17,14 +18,22 @@ public class MV {
     @JoinColumn(name = "person") //only responsible foe database name
     private Person person;
 
-//    @ManyToOne
-//    private Employee employee;
+    @OneToMany(mappedBy = "clientId")
+    @JsonIgnoreProperties({"employeeId", "clientId"})
+    private List<Visit> visitList;
 
     @ManyToOne
     @JoinColumn(name = "model")
     private Model model;
 
     private LocalDate yearMade;
+
+    public MV() {
+    }
+
+    public MV(String vin) {
+        this.vin = vin;
+    }
 
     public String getVin() {
         return vin;
@@ -66,12 +75,11 @@ public class MV {
         this.person = person;
     }
 
+    public List<Visit> getVisitList() {
+        return visitList;
+    }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
+    public void setVisitList(List<Visit> visitList) {
+        this.visitList = visitList;
+    }
 }

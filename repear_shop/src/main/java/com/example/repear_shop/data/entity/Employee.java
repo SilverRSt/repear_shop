@@ -23,8 +23,8 @@ public class Employee extends Person{
     private RepairShop repairShopId;
 
     @OneToMany(mappedBy = "employeeId")
-    //@JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
-    @JsonIgnoreProperties({"employeeId"})
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
+    //@JsonIgnoreProperties({"employeeId"})
     private List<Visit> visitList;
 
 //    @OneToMany(mappedBy = "employee")

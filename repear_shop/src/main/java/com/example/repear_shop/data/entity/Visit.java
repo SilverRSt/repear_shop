@@ -10,9 +10,9 @@ public class Visit {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long visitId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "client_id")
-//    private MV clientId;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private MV clientId;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -60,5 +60,13 @@ public class Visit {
 
     public void setEmployeeId(Employee employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public MV getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(MV clientId) {
+        this.clientId = clientId;
     }
 }
