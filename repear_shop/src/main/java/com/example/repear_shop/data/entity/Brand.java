@@ -11,9 +11,12 @@ public class Brand {
     private String brand;
 
     @OneToMany(mappedBy = "brand")
-    //@JsonIgnoreProperties("brand")
     @JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
     private List<Model> modelList;
+
+    @OneToMany(mappedBy = "brandRestriction")
+    @JsonIgnoreProperties({"brandRestriction"})
+    private List<RepairShop> repairShopList;
 
     public Brand() {
     }
@@ -36,5 +39,13 @@ public class Brand {
 
     public void setModelList(List<Model> modelList) {
         this.modelList = modelList;
+    }
+
+    public List<RepairShop> getRepairShopList() {
+        return repairShopList;
+    }
+
+    public void setRepairShopList(List<RepairShop> repairShopList) {
+        this.repairShopList = repairShopList;
     }
 }

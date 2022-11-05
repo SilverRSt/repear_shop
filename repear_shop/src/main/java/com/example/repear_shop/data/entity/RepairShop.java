@@ -27,7 +27,9 @@ public class RepairShop {
         this.repairShopId = repairShopId;
     }
 
-    //private Brand brandRestriction;
+    @ManyToOne
+    @JoinColumn(name = "brand_restriction")
+    private Brand brandRestriction;
 
     public Long getRepairShopId() {
         return repairShopId;
@@ -59,5 +61,13 @@ public class RepairShop {
 
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+
+    public Brand getBrandRestriction() {
+        return brandRestriction;
+    }
+
+    public void setBrandRestriction(Brand brandRestriction) {
+        this.brandRestriction = brandRestriction;
     }
 }
