@@ -1,6 +1,7 @@
 package com.example.repear_shop.data.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Qualification {
@@ -9,6 +10,16 @@ public class Qualification {
     private Long qualificationId;
 
     private String qualification;
+
+    @OneToMany(mappedBy = "qualificationId")
+    private List<EmployeeQualification> employees;
+
+    public Qualification() {
+    }
+
+    public Qualification(Long qualificationId) {
+        this.qualificationId = qualificationId;
+    }
 
     public Long getQualificationId() {
         return qualificationId;
@@ -24,5 +35,13 @@ public class Qualification {
 
     public void setQualification(String qualification) {
         this.qualification = qualification;
+    }
+
+    public List<EmployeeQualification> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<EmployeeQualification> employees) {
+        this.employees = employees;
     }
 }

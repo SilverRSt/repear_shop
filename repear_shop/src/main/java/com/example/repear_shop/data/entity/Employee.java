@@ -8,15 +8,6 @@ import java.util.List;
 @Entity
 @PrimaryKeyJoinColumn(name = "employee_id")
 public class Employee extends Person{
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long employeeId;
-
-
-//    @OneToOne
-//    @JoinColumn(name = "id")
-//    @MapsId
-//    private Person personId;
 
     @ManyToOne
     @JoinColumn(name = "repair_shop_id")
@@ -24,26 +15,14 @@ public class Employee extends Person{
 
     @OneToMany(mappedBy = "employeeId")
     @JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
-    //@JsonIgnoreProperties({"employeeId"})
     private List<Visit> visitList;
 
-//    @OneToMany(mappedBy = "employee")
-//    //@JsonIgnoreProperties("employee")
-//    @JsonIgnoreProperties({"model", "employee", "brand"})
-//    private List<MV> mvList;
-
-//    public Person getPersonId() {
-//        return personId;
-//    }
+    @OneToMany(mappedBy = "employeeId")
+    private List<EmployeeQualification> qualifications;
 
 
     public Employee() {
     }
-
-//    public Employee(Long employee_id) {
-//        this.employeeId = employee_id;
-//    }
-
 
     public Employee(long id) {
         super(id);
@@ -63,5 +42,13 @@ public class Employee extends Person{
 
     public void setVisitList(List<Visit> visitList) {
         this.visitList = visitList;
+    }
+
+    public List<EmployeeQualification> getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(List<EmployeeQualification> qualifications) {
+        this.qualifications = qualifications;
     }
 }
