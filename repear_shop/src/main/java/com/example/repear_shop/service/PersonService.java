@@ -1,5 +1,6 @@
 package com.example.repear_shop.service;
 
+import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
 
 import java.util.List;
@@ -13,6 +14,11 @@ public interface PersonService {
 
     void deletePerson(long id);
 
-    List<Person> findAllByFirstName(String name);
+    List<Person> getPersonByFirstName(String firstName);
 
+    List<Person> getPersonByLastName(String lastName);
+
+    List<Person> getPersonsStartingWithFirstName(String firstName);
+
+    List<MV> getAllMVsForPersonById(Long id);
 }

@@ -15,7 +15,7 @@ public class MV {
     private String registrationPlate;
 
     @ManyToOne
-    @JoinColumn(name = "person") //only responsible foe database name
+    @JoinColumn(name = "person") //only responsible for database name
     private Person person;
 
     @OneToMany(mappedBy = "clientId")
