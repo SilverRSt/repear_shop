@@ -2,11 +2,12 @@ package com.example.repear_shop.service;
 
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
+import com.example.repear_shop.dto.PersonDTO;
 
 import java.util.List;
 
 public interface PersonService {
-    List<Person> getPersons();
+    List<PersonDTO> getPersons();
 
     Person createPerson(Person person);
 

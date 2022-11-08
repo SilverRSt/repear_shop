@@ -2,22 +2,24 @@ package com.example.repear_shop.controller;
 
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
+import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.service.PersonService;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/persons")
 public class PersonController {
     private final PersonService services;
 
-    public PersonController(PersonService services) {
-        this.services = services;
-    }
+    //private final ModelMapper mapper;
 
     @GetMapping
-    public List<Person> getPersons() {
+    public List<PersonDTO> getPersons() {
         return this.services.getPersons();
     }
 

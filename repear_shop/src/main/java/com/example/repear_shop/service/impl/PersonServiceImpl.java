@@ -3,23 +3,33 @@ package com.example.repear_shop.service.impl;
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.data.repository.PersonRepository;
+import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.service.PersonService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImpl implements PersonService {
     private final PersonRepository repository;
 
-    public PersonServiceImpl(PersonRepository personRepository) {
-        this.repository = personRepository;
+    private final ModelMapper mapper;
+
+    public PersonServiceImpl(PersonRepository repository, ModelMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
-    public List<Person> getPersons() {
-        return this.repository.findAll();
+    public List<PersonDTO> getPersons() {
+        //return this.repository.findAll();
+        return this.repository.findAll()
+                .stream()
+                .map(this::convertToPersonDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -60,5 +70,8 @@ public class PersonServiceImpl implements PersonService {
         return person.get().getMvList();
     }
 
+    private PersonDTO convertToPersonDTO(Person person) {
+        return this.mapper.map(person, PersonDTO.class);
+    }
 
 }

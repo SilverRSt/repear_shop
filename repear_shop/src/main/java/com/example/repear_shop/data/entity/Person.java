@@ -2,11 +2,13 @@ package com.example.repear_shop.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
