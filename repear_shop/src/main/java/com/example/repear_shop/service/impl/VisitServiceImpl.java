@@ -6,6 +6,7 @@ import com.example.repear_shop.service.VisitService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VisitServiceImpl implements VisitService {
@@ -34,5 +35,21 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public void deleteVisit(Long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public List<Visit> getAllVisitsForClient(String firsName, String lastName) {
+        List<Visit> allVisits = this.repository.findAll();
+
+        return allVisits.stream().filter(v ->
+                v.getClientId().getPerson().getFirstName().equals(firsName) &&
+                v.getClientId().getPerson().getLastName().equals(lastName)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> getAllVisitsForClient(Long id) {
+        List<Visit> allVisits = this.repository.findAll();
+
+        return allVisits.stream().filter(v-> v.getClientId().getPerson().getId() == id).collect(Collectors.toList());
     }
 }

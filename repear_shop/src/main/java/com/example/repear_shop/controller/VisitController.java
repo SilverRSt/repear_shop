@@ -34,4 +34,14 @@ public class VisitController {
     public void deleteVisit(@PathVariable Long id) {
         this.service.deleteVisit(id);
     }
+
+    @GetMapping("/client/{firstName} {lastName}")
+    public List<Visit> getAllVisitsForClient(@PathVariable String firstName, @PathVariable String lastName) {
+        return this.service.getAllVisitsForClient(firstName, lastName);
+    }
+
+    @GetMapping("/clientId/{id}")
+    public List<Visit> getAllVisitsForClient(@PathVariable Long id) {
+        return this.service.getAllVisitsForClient(id);
+    }
 }
