@@ -1,11 +1,17 @@
 package com.example.repear_shop.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Model {
     @Id
     private String model;
@@ -15,38 +21,10 @@ public class Model {
     private Brand brand;
 
     @OneToMany(mappedBy = "model")
-    //@JsonIgnoreProperties("model")
-    @JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId"})
     private List<MV> mvList;
-
-    public Model() {
-    }
 
     public Model(String model) {
         this.model = model;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
-    public List<MV> getMvList() {
-        return mvList;
-    }
-
-    public void setMvList(List<MV> mvList) {
-        this.mvList = mvList;
     }
 }

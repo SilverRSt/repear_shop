@@ -1,51 +1,27 @@
 package com.example.repear_shop.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Brand {
     @Id
     private String brand;
 
     @OneToMany(mappedBy = "brand")
-    @JsonIgnoreProperties({"model", "person", "brand", "employeeId"})
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId"})
     private List<Model> modelList;
 
     @OneToMany(mappedBy = "brandRestriction")
     @JsonIgnoreProperties({"brandRestriction"})
     private List<RepairShop> repairShopList;
 
-    public Brand() {
-    }
-
-    public Brand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public List<Model> getModelList() {
-        return modelList;
-    }
-
-    public void setModelList(List<Model> modelList) {
-        this.modelList = modelList;
-    }
-
-    public List<RepairShop> getRepairShopList() {
-        return repairShopList;
-    }
-
-    public void setRepairShopList(List<RepairShop> repairShopList) {
-        this.repairShopList = repairShopList;
-    }
 }
