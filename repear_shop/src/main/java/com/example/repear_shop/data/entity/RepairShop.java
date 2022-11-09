@@ -33,6 +33,9 @@ public class RepairShop {
     @JoinColumn(name = "brand_restriction")
     private Brand brandRestriction;
 
+    @ManyToMany(mappedBy = "repairShops")
+    private List<ServiceType> services;
+
     public RepairShop(Long repairShopId) {
         this.repairShopId = repairShopId;
     }

@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,6 +36,9 @@ public class Visit {
 
     @NotNull
     private Double price;
+
+    @ManyToMany(mappedBy = "visits")
+    private List<ServiceType> services;
 
     public Visit(Long visitId) {
         this.visitId = visitId;
