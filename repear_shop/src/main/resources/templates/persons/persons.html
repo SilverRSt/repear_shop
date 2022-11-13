@@ -8,19 +8,17 @@
 <nav th:replace="fragments :: navbar"></nav>
 
 
-<h4 th:if="${persons.size()>0}" th:text="'Persons: ' + ${persons.size()}"> </h4>
-
 
 
 <div class="container-fluid">
-    
-<!--    mechanic for sorting and search bar goes here-->
 
+<!--    mechanic for sorting and search bar goes here-->
+<!--    <h4 th:if="${persons.size()>0}" th:text="'Persons: ' + ${persons.size()}"> </h4>-->
     <div class="row justify-content-center">
         <div class="col-sm-10 mt-4">
 
 
-        <!--    <h3 th:unless="${persons} and ${persons.size()}">There are no persons!</h3>-->
+            <h3 th:unless="${persons} and ${persons.size()}">There are no persons!</h3>
             <div class="table-responsive">
                 <table th:if="${persons.size()>0}" class="table table-bordered table-striped table-hover table-sm mt-2">
                     <thead class="table-dark">
