@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+<nav th:replace="fragments :: navbar"></nav>
+
+<div class="container-fluid">
+
+
+    <div class="row justify-content-center">
+        <div class="col-sm-10 mt-4">
+
+
+            <h3 th:unless="${qualifications} and ${qualifications.size()}">There are no qualifications!</h3>
+            <div class="table-responsive">
+                <table th:if="${qualifications.size()>0}" class="table table-bordered table-striped table-hover table-sm mt-2">
+                    <thead class="table-dark">
+                    <th>Qualification</th>
+
+                    <th>#Update</th>
+                    <th>#Delete</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="quali : ${qualifications}">
+                        <td th:text="${quali.qualification}"></td>
+
+                        <td class="text-center"><a th:href="@{'qualifications/update-qualification/'+${quali.qualificationId}}" class="btn btn-warning">Update</a></td>
+                        <td class="text-center"><a href="#" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+<footer th:replace="fragments :: footer"></footer>
+</body>
+
+</html>

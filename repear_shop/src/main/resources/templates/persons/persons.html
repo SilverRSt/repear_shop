@@ -37,8 +37,8 @@
                             <td th:text="${person.lastName}"></td>
                             <td th:text="${person.phoneNumber}"></td>
 
-                            <td><a th:href="@{'persons/update-person/'+${person.id}}" class="btn btn-warning">Update</a></td>
-                            <td><a href="#" class="btn btn-danger">Delete</a></td>
+                            <td class="text-center"><a th:href="@{'persons/update-person/'+${person.id}}" class="btn btn-warning">Update</a></td>
+                            <td class="text-center"><a href="#" class="btn btn-danger">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>
