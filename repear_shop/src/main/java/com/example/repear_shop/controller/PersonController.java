@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/persons")
+@RequestMapping("/api/persons")
 public class PersonController {
     private final PersonService services;
 
