@@ -26,7 +26,7 @@ public class RepairShop {
     private String address;
 
     @OneToMany(mappedBy = "repairShopId")
-    @JsonIgnoreProperties({"repairShopId", "employeeId", "clientId", "qualificationId", "visitId", "person"})
+    @JsonIgnoreProperties({"repairShopId", "employeeId", "clientId", "qualificationId", "visitId", "person", "visits", "services", "repairShops", "serviceId"})
     private List<Employee> employeeList;
 
     @ManyToOne
@@ -34,6 +34,7 @@ public class RepairShop {
     private Brand brandRestriction;
 
     @ManyToMany(mappedBy = "repairShops")
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId"})
     private List<ServiceType> services;
 
     public RepairShop(Long repairShopId) {

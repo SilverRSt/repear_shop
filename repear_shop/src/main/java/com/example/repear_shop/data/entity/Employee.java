@@ -22,10 +22,11 @@ public class Employee extends Person {
     private RepairShop repairShopId;
 
     @OneToMany(mappedBy = "employeeId")
-    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "qualificationId", "visitId", "clientId"})
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "qualificationId", "visitId", "clientId", "visits", "services", "repairShops", "serviceId", "qualifications", "repairShopId", "employee_id"})
     private List<Visit> visitList;
 
     @ManyToMany(mappedBy = "employees") //name of list from qualification
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId", "qualifications", "employee_id"})
     private List<Qualification> qualifications;
 
 }

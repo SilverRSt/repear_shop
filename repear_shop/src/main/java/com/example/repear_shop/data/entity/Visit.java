@@ -1,5 +1,6 @@
 package com.example.repear_shop.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,6 +39,7 @@ public class Visit {
     private Double price;
 
     @ManyToMany(mappedBy = "visits")
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId"})
     private List<ServiceType> services;
 
     public Visit(Long visitId) {

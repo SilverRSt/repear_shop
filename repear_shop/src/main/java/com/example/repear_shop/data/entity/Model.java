@@ -21,7 +21,7 @@ public class Model {
     private Brand brand;
 
     @OneToMany(mappedBy = "model")
-    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId"})
+    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId"})
     private List<MV> mvList;
 
     public Model(String model) {

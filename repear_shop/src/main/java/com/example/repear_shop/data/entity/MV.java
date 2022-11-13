@@ -42,7 +42,7 @@ public class MV {
     private Person person;
 
     @OneToMany(mappedBy = "clientId")
-    @JsonIgnoreProperties({"employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "person"})
+    @JsonIgnoreProperties({"employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "person", "visits", "services", "repairShops", "serviceId"})
     private List<Visit> visitList;
 
     public MV(String vin) {
