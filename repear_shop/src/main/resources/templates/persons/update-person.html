@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+<nav th:replace="fragments :: navbar"></nav>
+
+<div class="container-fluid">
+
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-7">
+
+            <form method="POST" th:action="@{/persons/update/{id}(id=${id})}" th:object="${person}">
+
+                <div class="mb-3">
+                    <label for="firstName">First Name</label>
+                    <input class="form-control" type="text" th:field="*{firstName}" id="firstName" required>
+                    <span class="text-danger" th:id="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName">Last Name</label>
+                    <input class="form-control" type="text" th:field="*{lastName}" id="lastName" required>
+                    <span class="text-danger" th:id="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+                </div>
+                <div class="mb-3">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input class="form-control" type="text" th:field="*{phoneNumber}" id="phoneNumber" required>
+                    <span class="text-danger" th:id="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Last Name Error</span>
+                </div>
+
+                <div class="text-center mb-3">
+                    <button class="btn btn-success fs-4" type="submit">Update</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<footer th:replace="fragments :: footer"></footer>
+</body>
+
+</html>

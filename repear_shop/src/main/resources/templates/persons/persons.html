@@ -27,8 +27,7 @@
                         <th>Last Name</th>
                         <th>Phone Number</th>
 
-                        <th>#Read</th>
-                        <th>#Edit</th>
+                        <th>#Update</th>
                         <th>#Delete</th>
                     </thead>
                     <tbody>
@@ -38,8 +37,7 @@
                             <td th:text="${person.lastName}"></td>
                             <td th:text="${person.phoneNumber}"></td>
 
-                            <td><a href="#" class="btn btn-info">Read</a></td>
-                            <td><a href="#" class="btn btn-warning">Edit</a></td>
+                            <td><a th:href="@{'persons/update-person/'+${person.id}}" class="btn btn-warning">Update</a></td>
                             <td><a href="#" class="btn btn-danger">Delete</a></td>
                         </tr>
                     </tbody>

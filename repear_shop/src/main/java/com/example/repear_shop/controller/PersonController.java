@@ -3,6 +3,7 @@ package com.example.repear_shop.controller;
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.dto.PersonDTO;
+import com.example.repear_shop.dto.PersonUpdateDTO;
 import com.example.repear_shop.service.PersonService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,7 +17,7 @@ import java.util.List;
 public class PersonController {
     private final PersonService services;
 
-    //private final ModelMapper mapper;
+    private final ModelMapper mapper;
 
     @GetMapping
     public List<PersonDTO> getPersons() {
@@ -28,9 +29,14 @@ public class PersonController {
         return this.services.createPerson(person);
     }
 
+//    @PutMapping("/{id}")
+//    public Person updatePerson(@PathVariable long id, @RequestBody Person person) {
+//        return this.services.updatePerson(id, person);
+//    }
+
     @PutMapping("/{id}")
     public Person updatePerson(@PathVariable long id, @RequestBody Person person) {
-        return this.services.updatePerson(id, person);
+        return this.services.updatePerson(id, this.mapper.map(person, PersonUpdateDTO.class));
     }
 
     @DeleteMapping("/{id}")

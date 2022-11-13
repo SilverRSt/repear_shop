@@ -1,15 +1,21 @@
-package com.example.repear_shop.web.view.model;
+package com.example.repear_shop.dto;
 
+import com.example.repear_shop.data.entity.MV;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class PersonViewModel {
+public class PersonUpdateDTO {
     private long id;
+
     private String firstName;
+
     private String lastName;
+
     private String phoneNumber;
+
+    private List<MV> mvList;
 }

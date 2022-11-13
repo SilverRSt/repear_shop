@@ -4,6 +4,7 @@ import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.data.repository.PersonRepository;
 import com.example.repear_shop.dto.PersonDTO;
+import com.example.repear_shop.dto.PersonUpdateDTO;
 import com.example.repear_shop.service.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -38,14 +39,19 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person updatePerson(long id, Person person) {
+    public Person updatePerson(long id, PersonUpdateDTO person) {
         person.setId(id);
-        return this.repository.save(person);
+        return this.repository.save(this.mapper.map(person, Person.class));
     }
 
     @Override
     public void deletePerson(long id) {
         this.repository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Person> getPersonById(Long id) {
+        return this.repository.findById(id);
     }
 
     @Override
