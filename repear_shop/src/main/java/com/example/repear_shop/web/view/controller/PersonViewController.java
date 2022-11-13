@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class PersonViewController {
     public String getPersons(Model model) {
         final List<PersonViewModel> persons = this.service.getPersons()
                 .stream()
+                .sorted(Comparator.comparing(PersonDTO::getFirstName))
                 .map(this::convertToPersonViewModel)
                 .collect(Collectors.toList());
 
