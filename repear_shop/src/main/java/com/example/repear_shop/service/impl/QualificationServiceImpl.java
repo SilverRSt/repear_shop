@@ -30,8 +30,8 @@ public class QualificationServiceImpl implements QualificationService {
     }
 
     @Override
-    public Qualification createQualification(Qualification qualification) {
-        return this.repository.save(qualification);
+    public Qualification createQualification(QualificationDTO qualification) {
+        return this.repository.save(this.mapper.map(qualification, Qualification.class));
     }
 
     @Override

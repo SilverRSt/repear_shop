@@ -13,7 +13,7 @@
         <div class="col-sm-7">
 
 
-            <form method="POST" th:action="@{/qualification/update/{id}(id=${qualificationId})}" th:object="${qualification}">
+            <form method="POST" th:action="@{/qualifications/update/{id}(id=${qualification.qualificationId})}" th:object="${qualification}">
 
                 <div class="mb-3">
                     <label for="qualificationName">Qualification Name</label>

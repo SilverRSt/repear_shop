@@ -9,7 +9,7 @@ import java.util.List;
 public interface QualificationService {
     List<QualificationDTO> getQualifications();
 
-    Qualification createQualification(Qualification qualification);
+    Qualification createQualification(QualificationDTO qualification);
 
     Qualification updateQualification(Long id, QualificationDTO qualification);
 

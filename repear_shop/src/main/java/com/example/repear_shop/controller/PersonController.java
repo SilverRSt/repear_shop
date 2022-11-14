@@ -2,6 +2,7 @@ package com.example.repear_shop.controller;
 
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
+import com.example.repear_shop.dto.PersonCreateDTO;
 import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.dto.PersonUpdateDTO;
 import com.example.repear_shop.service.PersonService;
@@ -26,7 +27,7 @@ public class PersonController {
 
     @PostMapping
     public Person createPerson(@RequestBody Person person) {
-        return this.services.createPerson(person);
+        return this.services.createPerson(this.mapper.map(person, PersonCreateDTO.class));
     }
 
 //    @PutMapping("/{id}")

@@ -15,6 +15,7 @@
 
 
             <h3 th:unless="${qualifications} and ${qualifications.size()}">There are no qualifications!</h3>
+            <a th:href="@{'qualifications/create-qualification'}" class="btn btn-primary mb-3">Create Qualification</a>
             <div class="table-responsive">
                 <table th:if="${qualifications.size()>0}" class="table table-bordered table-striped table-hover table-sm mt-2">
                     <thead class="table-dark">

@@ -3,6 +3,7 @@ package com.example.repear_shop.service.impl;
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.data.repository.PersonRepository;
+import com.example.repear_shop.dto.PersonCreateDTO;
 import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.dto.PersonUpdateDTO;
 import com.example.repear_shop.service.PersonService;
@@ -34,8 +35,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person createPerson(Person person) {
-        return this.repository.save(person);
+    public Person createPerson(PersonCreateDTO person) {
+        return this.repository.save(this.mapper.map(person, Person.class));
     }
 
     @Override

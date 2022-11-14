@@ -11,7 +11,6 @@
 
 
 <div class="container-fluid">
-
 <!--    mechanic for sorting and search bar goes here-->
 <!--    <h4 th:if="${persons.size()>0}" th:text="'Persons: ' + ${persons.size()}"> </h4>-->
     <div class="row justify-content-center">
@@ -19,6 +18,7 @@
 
 
             <h3 th:unless="${persons} and ${persons.size()}">There are no persons!</h3>
+            <a th:href="@{'persons/create-person'}" class="btn btn-primary mb-3">Create Person</a>
             <div class="table-responsive">
                 <table th:if="${persons.size()>0}" class="table table-bordered table-striped table-hover table-sm mt-2">
                     <thead class="table-dark">
@@ -47,7 +47,6 @@
 
         </div>
     </div>
-
 </div>
 
 

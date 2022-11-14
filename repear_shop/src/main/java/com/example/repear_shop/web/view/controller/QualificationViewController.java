@@ -2,6 +2,7 @@ package com.example.repear_shop.web.view.controller;
 
 import com.example.repear_shop.dto.QualificationDTO;
 import com.example.repear_shop.service.QualificationService;
+import com.example.repear_shop.web.view.model.qualification.QualificationCreateViewModel;
 import com.example.repear_shop.web.view.model.qualification.QualificationUpdateViewModel;
 import com.example.repear_shop.web.view.model.qualification.QualificationViewModel;
 import lombok.AllArgsConstructor;
@@ -9,10 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Comparator;
@@ -38,14 +36,29 @@ public class QualificationViewController {
         return "/qualifications/qualifications.html";
     }
 
+    @GetMapping("create-qualification")
+    public String showCreateQualificationForm(Model model) {
+        model.addAttribute("qualification", new QualificationCreateViewModel());
+        return "/qualifications/create-qualification.html";
+    }
+
+    @PostMapping("/create")
+    public String createQualification(@Valid@ModelAttribute("qualification") QualificationCreateViewModel qualification, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "/qualifications/create-qualification.html";
+        }
+
+        this.service.createQualification(this.mapper.map(qualification, QualificationDTO.class));
+        return "redirect:/qualifications";
+    }
+
     @GetMapping("/update-qualification/{id}")
     public String getQualification(@PathVariable Long id, Model model) {
         model.addAttribute("qualification", this.service.getQualificationById(id));
         return "/qualifications/update-qualification.html";
     }
 
-
-    @GetMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public String updateQualification(@PathVariable Long id, @Valid @ModelAttribute("qualification")QualificationUpdateViewModel qualification, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "/qualifications/update-qualification.html";

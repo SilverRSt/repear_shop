@@ -27,7 +27,7 @@ public class QualificationController {
 
     @PostMapping
     public Qualification createQualification(@RequestBody Qualification qualification){
-        return this.service.createQualification(qualification);
+        return this.service.createQualification(this.mapper.map(qualification, QualificationDTO.class));
     }
 
     @PutMapping("/{id}")
