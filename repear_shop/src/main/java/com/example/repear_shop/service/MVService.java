@@ -9,4 +9,5 @@ public interface MVService {
     MV createMV(MV mv);
     MV updateMV(String vin, MV mv);
     void deleteMV(String vin);
+    MV findByVin(String vin);
 }

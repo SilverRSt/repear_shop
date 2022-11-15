@@ -35,4 +35,9 @@ public class MVServicesImpl implements MVService {
     public void deleteMV(String vin) {
         this.repository.deleteById(vin);
     }
+
+    @Override
+    public MV findByVin(String vin) {
+        return this.repository.findOneByVin(vin);
+    }
 }

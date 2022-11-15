@@ -1,8 +1,11 @@
 package com.example.repear_shop.web.view.controller;
 
+import com.example.repear_shop.data.entity.MV;
+import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.dto.PersonCreateDTO;
 import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.dto.PersonUpdateDTO;
+import com.example.repear_shop.service.MVService;
 import com.example.repear_shop.service.PersonService;
 import com.example.repear_shop.web.view.model.PersonCreateViewModel;
 import com.example.repear_shop.web.view.model.PersonUpdateViewModel;
@@ -26,6 +29,7 @@ public class PersonViewController {
     private static final String MAIN_PAGE = "redirect:/persons";
 
     private final PersonService service;
+    private final MVService mvService;
     private final ModelMapper mapper;
 
     @GetMapping
@@ -59,9 +63,21 @@ public class PersonViewController {
     @GetMapping("/update-person/{id}")
     public String getPerson(Model model, @PathVariable Long id) {
         //not working ?
-    //    model.addAttribute("person", this.mapper.map(this.service.getPersonById(id),
-    //            PersonUpdateViewModel.class));
-        model.addAttribute("person", this.service.getPersonById(id));
+        model.addAttribute("person", this.mapper.map(this.service.getPersonById(id),
+                PersonUpdateViewModel.class));
+        //model.addAttribute("person", this.service.getPersonById(id));
+        model.addAttribute("mvs", this.service.getAllMvsNotBelongingToPerson(id)); //similar to getPersons()
+        return "/persons/update-person.html";
+    }
+
+    @PostMapping("/addMV/{id}")
+    public String addMV(Model model, @PathVariable Long id, @RequestParam String mvVin) {
+        MV newMv = this.mvService.findByVin(mvVin);
+        Person newPerson = this.service.getPersonById(id);
+        newMv.setPerson(newPerson);
+
+        this.mvService.updateMV(mvVin, newMv);
+        model.addAttribute("person", newPerson);
         return "/persons/update-person.html";
     }
 

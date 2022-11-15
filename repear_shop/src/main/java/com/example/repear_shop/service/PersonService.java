@@ -7,7 +7,6 @@ import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.dto.PersonUpdateDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PersonService {
     List<PersonDTO> getPersons();
@@ -16,6 +15,8 @@ public interface PersonService {
 
     //Person updatePerson(long id, Person person);
     Person updatePerson(long id, PersonUpdateDTO person);
+
+    void addMV(long id, String mvVin);
 
     void deletePerson(long id);
 
@@ -28,4 +29,6 @@ public interface PersonService {
     List<Person> getPersonsStartingWithFirstName(String firstName);
 
     List<MV> getAllMVsForPersonById(Long id);
+
+    List<MV> getAllMvsNotBelongingToPerson(Long id);
 }

@@ -2,6 +2,7 @@ package com.example.repear_shop.service.impl;
 
 import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
+import com.example.repear_shop.data.repository.MVRepository;
 import com.example.repear_shop.data.repository.PersonRepository;
 import com.example.repear_shop.dto.PersonCreateDTO;
 import com.example.repear_shop.dto.PersonDTO;
@@ -17,13 +18,16 @@ import java.util.stream.Collectors;
 @Service
 public class PersonServiceImpl implements PersonService {
     private final PersonRepository repository;
+    private final MVRepository repositoryMV;
 
     private final ModelMapper mapper;
 
-    public PersonServiceImpl(PersonRepository repository, ModelMapper mapper) {
+    public PersonServiceImpl(PersonRepository repository, MVRepository repositoryMV, ModelMapper mapper) {
         this.repository = repository;
+        this.repositoryMV = repositoryMV;
         this.mapper = mapper;
     }
+
 
     @Override
     public List<PersonDTO> getPersons() {
@@ -43,6 +47,15 @@ public class PersonServiceImpl implements PersonService {
     public Person updatePerson(long id, PersonUpdateDTO person) {
         person.setId(id);
         return this.repository.save(this.mapper.map(person, Person.class));
+    }
+
+    @Override //CHANGE -> REMOVE
+    public void addMV(long id, String mvVin) {
+        MV newMV = this.repositoryMV.findOneByVin(mvVin);
+        Person person = this.getPersonById(id);
+        person.getMvList().add(newMV);
+
+        this.updatePerson(id, this.mapper.map(person, PersonUpdateDTO.class));
     }
 
     @Override
@@ -76,6 +89,15 @@ public class PersonServiceImpl implements PersonService {
 
         return person.get().getMvList();
     }
+
+    @Override
+    public List<MV> getAllMvsNotBelongingToPerson(Long id) {
+        return this.repositoryMV.findAll()
+                .stream()
+                .filter(mv -> mv.getPerson() == null)
+                .collect(Collectors.toList());
+    }
+
 
     private PersonDTO convertToPersonDTO(Person person) {
         return this.mapper.map(person, PersonDTO.class);
