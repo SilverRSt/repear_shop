@@ -19,7 +19,7 @@ public interface PersonService {
 
     void deletePerson(long id);
 
-    Optional<Person> getPersonById(Long id);
+    Person getPersonById(Long id);
 
     List<Person> getPersonByFirstName(String firstName);
 

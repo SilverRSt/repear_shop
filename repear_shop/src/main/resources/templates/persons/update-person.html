@@ -31,6 +31,32 @@
                     <span class="text-danger" th:id="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Last Name Error</span>
                 </div>
 
+                <div class="table-responsive">
+                    <table th:if="${person.mvList.size()>0}" class="table table-bordered table-striped table-hover table-sm mt-2">
+                        <thead class="table-dark">
+                        <th>VIN</th>
+                        <th>Registration Plate</th>
+                        <th>Year Made</th>
+                        <th>Model</th>
+<!--                        <th>Brand</th>-->
+
+                        <th>#Delete</th>
+                        </thead>
+                        <tbody>
+                        <tr th:each="mv : ${person.mvList}">
+                            <td th:text="${mv.vin}"></td>
+                            <td th:text="${mv.registrationPlate}"></td>
+                            <td th:text="${mv.yearMade}"></td>
+                            <td th:text="${mv.model.model}"></td>
+<!--                            <td th:text="${mv.model.brand}"></td>-->
+
+                            <td class="text-center"><a href="#" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
                 <div class="text-center mb-3">
                     <button class="btn btn-success fs-4" type="submit">Update</button>
                 </div>

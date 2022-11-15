@@ -51,8 +51,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<Person> getPersonById(Long id) {
-        return this.repository.findById(id);
+    public Person getPersonById(Long id) {
+        return this.repository.getReferenceById(id);
     }
 
     @Override
