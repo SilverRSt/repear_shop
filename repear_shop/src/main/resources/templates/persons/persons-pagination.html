@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+<nav th:replace="fragments :: navbar"></nav>
+
+
+
+
+<div class="container-fluid">
+    <!--    mechanic for sorting and search bar goes here-->
+    <!--    <h4 th:if="${persons.size()>0}" th:text="'Persons: ' + ${persons.size()}"> </h4>-->
+    <div class="row justify-content-center">
+        <div class="col-sm-10 mt-4">
+
+
+            <h3 th:unless="${pageOfPersons} and ${pageOfPersons.size}">There are no persons!</h3>
+            <a th:href="@{'persons/create-person'}" class="btn btn-primary mb-3">Create Person</a>
+            <div class="table-responsive">
+                <table th:if="${pageOfPersons.size>0}" class="table table-bordered table-striped table-hover table-sm mt-2">
+                    <thead class="table-dark">
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+
+                    <th>#Update</th>
+                    <th>#Delete</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="person : ${pageOfPersons.content}">
+                        <td th:text="${person.id}"></td>
+                        <td th:text="${person.firstName}"></td>
+                        <td th:text="${person.lastName}"></td>
+                        <td th:text="${person.phoneNumber}"></td>
+
+                        <td class="text-center"><a th:href="@{'persons/update-person/'+${person.id}}" class="btn btn-warning">Update</a></td>
+                        <td class="text-center"><a href="#" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <ul class="pagination">
+                    <li class="page-item" th:if="${pageOfPersons.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+                        <a class="page-link" th:href="@{/persons/pagination/page/{page}/size/{size}(page=${pageNumber}, size=${pageOfPersons.size})}" th:text="${pageNumber}"></a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer th:replace="fragments :: footer"></footer>
+</body>
+
+</html>
