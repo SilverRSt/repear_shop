@@ -12,15 +12,20 @@ import com.example.repear_shop.web.view.model.PersonUpdateViewModel;
 import com.example.repear_shop.web.view.model.PersonViewModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @AllArgsConstructor
@@ -42,6 +47,24 @@ public class PersonViewController {
 
         model.addAttribute("persons", persons);
         return "/persons/persons.html";
+    }
+
+    @GetMapping("/pagination/page/{page}/size/{size}")
+    public String getPersonsPagination(Model model, @PathVariable int page, @PathVariable int size) {
+        Type pageType = new TypeToken<Page<PersonViewModel>>() {}.getType();
+
+        final Page<PersonViewModel> pageOfPersons =
+                this.mapper.map(this.service.getPersonsPagination(PageRequest.of(page-1, size)), pageType);
+
+        model.addAttribute("pageOfPersons", pageOfPersons);
+        int totalPages = pageOfPersons.getTotalPages();
+
+        if(totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "/persons/persons-pagination.html";
     }
 
     @GetMapping("/create-person")

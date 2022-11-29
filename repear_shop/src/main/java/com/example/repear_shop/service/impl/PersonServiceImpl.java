@@ -9,8 +9,13 @@ import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.dto.PersonUpdateDTO;
 import com.example.repear_shop.service.PersonService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +41,30 @@ public class PersonServiceImpl implements PersonService {
                 .stream()
                 .map(this::convertToPersonDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<PersonDTO> getPersonsPagination(Pageable pageable) {
+        List<PersonDTO> personList = this.repository.findAll()
+                .stream()
+                .map(this::convertToPersonDTO)
+                .collect(Collectors.toList());
+
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        int firstPersonNumber = page*size;
+
+
+        List<PersonDTO> personPageList;
+
+        if(personList.size() < firstPersonNumber) {
+            personPageList = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(firstPersonNumber + size, personList.size());
+            personPageList = personList.subList(firstPersonNumber, toIndex);
+        }
+
+        return new PageImpl<>(personPageList, PageRequest.of(page, size), personList.size());
     }
 
     @Override
