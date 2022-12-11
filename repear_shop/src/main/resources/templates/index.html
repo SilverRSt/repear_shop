@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+<nav th:replace="fragments :: navbar"></nav>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 mt-4">
+            <p th:text="'Welcome ' + ${username}"></p>
+            <p>INDEX</p>
+
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="fragments :: footer"></footer>
+</body>
+
+</html>
