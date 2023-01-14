@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,16 +28,16 @@ public class User implements UserDetails {
     private String password;
 
     @Column
-    private boolean isAccountNonExpired;
+    private boolean isAccountNonExpired = Boolean.TRUE;
 
     @Column
-    private boolean isAccountNonLocked;
+    private boolean isAccountNonLocked = Boolean.TRUE;
 
     @Column
-    private boolean isCredentialsNonExpired;
+    private boolean isCredentialsNonExpired = Boolean.TRUE;
 
     @Column
-    private boolean isEnabled;
+    private boolean isEnabled = Boolean.TRUE;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -64,6 +65,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setUsername(String username) {

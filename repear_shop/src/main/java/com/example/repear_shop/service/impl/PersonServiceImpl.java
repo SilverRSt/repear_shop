@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -69,12 +70,17 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person createPerson(PersonCreateDTO person) {
+        String codedPassword = person.getPassword();
+        codedPassword = new BCryptPasswordEncoder().encode(codedPassword);
+        person.setPassword(codedPassword);
+
         return this.repository.save(this.mapper.map(person, Person.class));
     }
 
     @Override
     public Person updatePerson(long id, PersonUpdateDTO person) {
-        person.setId(id);
+        person.setUserId(id);
+        person.setUsername(person.getUsername());
         return this.repository.save(this.mapper.map(person, Person.class));
     }
 

@@ -15,6 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class PersonUpdateViewModel {
+    //NEED IT FOR THE DAMN MAPPER TO KNOW THAT THE ENTITY EXISTS WITH THIS ID
+    private long userId;
+
+    @NotBlank
+    private String username;
+
+    @NotBlank
+    private String password;
+
     @NotBlank
     private String firstName;
 

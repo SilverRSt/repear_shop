@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class PersonUpdateDTO {
-    private long id;
+    private long userId;
 
     private String firstName;
 
@@ -18,4 +18,7 @@ public class PersonUpdateDTO {
     private String phoneNumber;
 
     private List<MV> mvList;
+
+    private String username;
+    private String password;
 }

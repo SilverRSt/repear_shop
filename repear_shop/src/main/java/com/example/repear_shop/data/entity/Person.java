@@ -17,10 +17,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@PrimaryKeyJoinColumn(name = "id")
+public class Person extends User{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
 
     @NotBlank
     private String firstName;
@@ -36,7 +37,7 @@ public class Person {
     @JsonIgnoreProperties({"model", "person", "brand", "clientId", "qualificationId", "visitId", "clientId", "visitId", "visits", "services", "repairShops", "serviceId"})
     private List<MV> mvList;
 
-    public Person(long id) {
-        this.id = id;
-    }
+//    public Person(long id) {
+//        this.id = id;
+//    }
 }

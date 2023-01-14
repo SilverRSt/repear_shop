@@ -33,6 +33,19 @@
           <span class="text-danger" th:id="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Last Name Error</span>
         </div>
 
+
+        <div class="mb-3">
+          <label for="username">Username</label>
+          <input class="form-control" type="text" th:field="*{username}" id="username" required>
+          <span class="text-danger" th:id="${#fields.hasErrors('username')}" th:errors="*{username}">Last Name Error</span>
+        </div>
+        <div class="mb-3">
+          <label for="password">Password</label>
+          <input class="form-control" type="text" th:field="*{password}" id="password" required>
+          <span class="text-danger" th:id="${#fields.hasErrors('password')}" th:errors="*{password}">Last Name Error</span>
+        </div>
+
+
         <div class="text-center mb-3">
           <button class="btn btn-success fs-4" type="submit">Create</button>
         </div>

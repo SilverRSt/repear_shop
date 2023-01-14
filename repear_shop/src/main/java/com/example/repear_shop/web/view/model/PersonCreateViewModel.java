@@ -10,6 +10,12 @@ import javax.validation.constraints.Size;
 @Setter
 public class PersonCreateViewModel {
     @NotBlank
+    private String username;
+
+    @NotBlank
+    private String password;
+
+    @NotBlank
     private String firstName;
 
     @NotBlank

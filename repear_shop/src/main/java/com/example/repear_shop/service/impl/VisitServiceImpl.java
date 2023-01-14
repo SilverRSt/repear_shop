@@ -6,6 +6,7 @@ import com.example.repear_shop.service.VisitService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,6 +51,6 @@ public class VisitServiceImpl implements VisitService {
     public List<Visit> getAllVisitsForClient(Long id) {
         List<Visit> allVisits = this.repository.findAll();
 
-        return allVisits.stream().filter(v-> v.getClientId().getPerson().getId() == id).collect(Collectors.toList());
+        return allVisits.stream().filter(v-> Objects.equals(v.getClientId().getPerson().getUserId(), id)).collect(Collectors.toList());
     }
 }
