@@ -14,6 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class QualificationUpdateViewModel {
+    private Long qualificationId;
+
     @NotBlank
     private String qualification;
 

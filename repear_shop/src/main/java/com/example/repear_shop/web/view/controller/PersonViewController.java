@@ -86,8 +86,13 @@ public class PersonViewController {
     @GetMapping("/update-person/{id}")
     public String getPerson(Model model, @PathVariable Long id) {
         //not working ?
-        model.addAttribute("person", this.mapper.map(this.service.getPersonById(id),
-                PersonUpdateViewModel.class));
+        try{
+            model.addAttribute("person", this.mapper.map(this.service.getPersonById(id),
+                    PersonUpdateViewModel.class));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Not valid person id detected.");
+        }
+
         //model.addAttribute("person", this.service.getPersonById(id));
         model.addAttribute("mvs", this.service.getAllMvsNotBelongingToPerson(id)); //similar to getPersons()
         return "/persons/update-person.html";

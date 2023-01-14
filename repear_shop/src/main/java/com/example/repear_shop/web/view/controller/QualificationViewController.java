@@ -54,7 +54,16 @@ public class QualificationViewController {
 
     @GetMapping("/update-qualification/{id}")
     public String getQualification(@PathVariable Long id, Model model) {
-        model.addAttribute("qualification", this.service.getQualificationById(id));
+        try {
+            //model.addAttribute("qualification", this.service.getQualificationById(id));
+
+            model.addAttribute("qualification", this.mapper.map(this.service.getQualificationById(id),
+                    QualificationUpdateViewModel.class));
+
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Not valid qualification id detected.");
+        }
+
         return "/qualifications/update-qualification.html";
     }
 
