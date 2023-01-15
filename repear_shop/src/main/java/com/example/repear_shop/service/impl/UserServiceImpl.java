@@ -1,6 +1,6 @@
 package com.example.repear_shop.service.impl;
 
-import com.example.repear_shop.data.entity.User;
+import com.example.repear_shop.data.entity.EndUser;
 import com.example.repear_shop.data.repository.UserRepository;
 import com.example.repear_shop.service.UserService;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.repository.findByUsername(username);
+        EndUser user = this.repository.findByUsername(username);
 
         if(user == null) {
             throw new UsernameNotFoundException(username);

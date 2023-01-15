@@ -22,7 +22,7 @@ public class Role implements GrantedAuthority {
     private String role;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    private Set<User> users;
+    private Set<EndUser> users;
 
     @Override
     public String getAuthority() {

@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @PrimaryKeyJoinColumn(name = "id")
-public class Person extends User{
+public class Person extends EndUser {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private long id;

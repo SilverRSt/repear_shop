@@ -1,6 +1,6 @@
 package com.example.repear_shop.web.view.controller;
 
-import com.example.repear_shop.data.entity.User;
+import com.example.repear_shop.data.entity.EndUser;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +19,7 @@ public class LoginViewController {
         Authentication credentials = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("username", authentication.getName());
 
-        User principal = (User) credentials.getPrincipal();
+        EndUser principal = (EndUser) credentials.getPrincipal();
         //model.addAttribute("username", principal.getAuthorities());
 
         return "index.html";
