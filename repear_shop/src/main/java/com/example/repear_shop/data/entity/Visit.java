@@ -39,7 +39,7 @@ public class Visit {
     private Double price;
 
     @ManyToMany(mappedBy = "visits")
-    @JsonIgnoreProperties({"model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId"})
+    @JsonIgnoreProperties({"mvList", "services", "visits", "users", "roles", "userId", "roleId", "model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId", "vin"})
     private List<ServiceType> services;
 
     public Visit(Long visitId) {

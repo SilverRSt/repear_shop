@@ -2,7 +2,9 @@ package com.example.repear_shop.service.impl;
 
 import com.example.repear_shop.data.entity.Visit;
 import com.example.repear_shop.data.repository.VisitRepository;
+import com.example.repear_shop.dto.VisitsDTO;
 import com.example.repear_shop.service.VisitService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class VisitServiceImpl implements VisitService {
     private final VisitRepository repository;
+    private final ModelMapper mapper;
 
-    public VisitServiceImpl(VisitRepository repository) {
+    public VisitServiceImpl(VisitRepository repository, ModelMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -52,5 +56,19 @@ public class VisitServiceImpl implements VisitService {
         List<Visit> allVisits = this.repository.findAll();
 
         return allVisits.stream().filter(v-> Objects.equals(v.getClientId().getPerson().getUserId(), id)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<VisitsDTO> getAllVisitsForClientDTO(Long id) {
+        List<VisitsDTO> visits = this.repository.findAll()
+                .stream()
+                .map(this::convertToVisitsDTO)
+                .collect(Collectors.toList());
+
+        return visits.stream().filter(v -> Objects.equals(v.getClientId().getPerson().getUserId(), id)).collect(Collectors.toList());
+    }
+
+    private VisitsDTO convertToVisitsDTO(Visit visit) {
+        return this.mapper.map(visit, VisitsDTO.class);
     }
 }

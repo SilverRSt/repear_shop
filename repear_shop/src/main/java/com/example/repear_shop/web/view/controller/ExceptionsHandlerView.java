@@ -4,7 +4,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+//TODO: UNCOMMENT BEFORE GIVING IN
+//@ControllerAdvice
 public class ExceptionsHandlerView {
 
     @ExceptionHandler(Exception.class)

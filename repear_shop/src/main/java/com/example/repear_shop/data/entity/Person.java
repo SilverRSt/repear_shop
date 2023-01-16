@@ -34,7 +34,7 @@ public class Person extends EndUser {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "person")
-    @JsonIgnoreProperties({"model", "person", "brand", "clientId", "qualificationId", "visitId", "clientId", "visitId", "visits", "services", "repairShops", "serviceId"})
+    @JsonIgnoreProperties({"visits", "users", "roles", "userId", "roleId", "model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId", "vin"})
     private List<MV> mvList;
 
 //    public Person(long id) {

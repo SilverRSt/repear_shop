@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class VisitsDTO {
-    private Long visitsId;
+    private long visitId;
     private MV clientId;
     private Employee employeeId;
     private LocalDate date;
