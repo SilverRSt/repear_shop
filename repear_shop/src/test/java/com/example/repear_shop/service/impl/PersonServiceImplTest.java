@@ -30,8 +30,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD) //make sure h2database is cleared as not to occur same instances
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY) //make sure h2database is cleared as not to occur same instances
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD) //makes sure h2database is cleared as not to occur same instances
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY) //makes sure h2database is cleared as not to occur same instances
 public class PersonServiceImplTest {
     private static final String TEST_PASSWORD = "123";
     private static final String TEST_PHONE_NUMBER = "7382942";
