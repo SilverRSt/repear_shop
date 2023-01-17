@@ -13,12 +13,28 @@
     <div class="row justify-content-center">
         <div class="col-sm-10 mt-4">
 
+            <h3 th:unless="${visits} and ${visits.size()}">You have no appointments.</h3>
+            <a href="#" class="btn btn-primary mb-3">Make Appointment</a>
 
+            <div class="table-responsive">
+                <table th:if="@{visits.size() > 0}" class="table table-bordered table-striped table-hover table-sm mt-2">
+                    <thead class="table-dark">
+                        <th>MV</th>
+                        <th>Employee</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                    </thead>
 
-
-
-
-
+                    <tbody>
+                        <tr th:each="visit : ${visits}">
+                            <td th:text="${visit.clientId.vin}"></td>
+                            <td th:text="${visit.employeeId.firstName}"></td>
+                            <td th:text="${visit.date}"></td>
+                            <td th:text="${visit.price}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
 
         </div>

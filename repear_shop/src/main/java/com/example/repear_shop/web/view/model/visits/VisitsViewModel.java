@@ -24,7 +24,7 @@ public class VisitsViewModel {
 
     @NotBlank
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate data;
+    private LocalDate date;
 
     @NotBlank
     private Double price;
