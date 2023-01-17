@@ -14,7 +14,7 @@
         <div class="col-sm-10 mt-4">
 
             <h3 th:unless="${visits} and ${visits.size()}">You have no appointments.</h3>
-            <a href="#" class="btn btn-primary mb-3">Make Appointment</a>
+            <a th:href="@{'visits/create-visit'}" class="btn btn-primary mb-3">Make Appointment</a>
 
             <div class="table-responsive">
                 <table th:if="@{visits.size() > 0}" class="table table-bordered table-striped table-hover table-sm mt-2">

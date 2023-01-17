@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<header th:replace="fragments :: header"></header>
+<nav th:replace="fragments :: navbar"></nav>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-7">
+
+
+            <form method="POST" action="#">
+                <div class="row g-3 mb-5">
+                    <div class="col col-sm-6">
+                        <label for="mvVin">Vehicle</label>
+                    <select class="form-select" name="mvVin" id="mvVin">
+                        <option hidden disabled selected value="-1">MVs</option>
+                        <option value="dummyValue">dummyValue</option>
+                        <option value="dummyValue">dummyValue</option>
+                        <option value="dummyValue">dummyValue</option>
+                    </select>
+                     </div>
+                </div>
+
+                <div class="row g-3 mb-5">
+                    <div class="col col-sm-6">
+                        <label for="employeeId">Employee</label>
+                        <select class="form-select" name="employeeId" id="employeeId">
+                            <option hidden disabled selected value="-1">Employees</option>
+                            <option value="dummyValue">dummyValue</option>
+                            <option value="dummyValue">dummyValue</option>
+                            <option value="dummyValue">dummyValue</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-5">
+                    <div class="col col-sm-6">
+                        <label for="date">Date</label>
+                        <input class="form-control" type="date" id="date" required>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="fragments :: footer"></footer>
+</body>
+
+</html>

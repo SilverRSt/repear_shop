@@ -1,6 +1,7 @@
 package com.example.repear_shop.web.view.controller;
 
 import com.example.repear_shop.data.entity.EndUser;
+import com.example.repear_shop.data.entity.RepairShop;
 import com.example.repear_shop.data.entity.Visit;
 import com.example.repear_shop.dto.VisitsDTO;
 import com.example.repear_shop.service.MVService;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Comparator;
@@ -29,6 +31,8 @@ public class VisitsViewController {
 
     private final VisitService visitService;
     private final ModelMapper mapper;
+
+    //private Long userId;
 
     @GetMapping
     public String getVisits(Model model) {
@@ -55,8 +59,26 @@ public class VisitsViewController {
         return "/visits/visits.html";
     }
 
+    @GetMapping("/create-visit")
+    public String createVisitForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = this.userService.getUserId(username);
+
+//        EndUser user = (EndUser) authentication.getPrincipal();
+//        long userId = user.getUserId();
+
+        model.addAttribute("userId").addAttribute(userId);
+        return "/visits/create-visit.html";
+    }
+
+//    private void getUserAuthentication() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        userId = this.userService.getUserId(username);
+//    }
+
     private VisitsViewModel convertToVisitViewModel(VisitsDTO visit) {
         return this.mapper.map(visit, VisitsViewModel.class);
     }
-
 }

@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/")
                 .authenticated()
-                .antMatchers("/visits").hasAnyAuthority("ADMIN", "PERSON")
+                .antMatchers("/visits/**").hasAnyAuthority("ADMIN", "PERSON")
                 .antMatchers("/**").hasAnyAuthority("ADMIN")
                 .and()
                 .formLogin()
