@@ -26,5 +26,7 @@ public class VisitsCreateViewModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    private Double price;
+
     private List<ServiceType> services;
 }

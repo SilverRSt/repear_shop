@@ -97,15 +97,13 @@ public class VisitsViewController {
             return "/visits/create-visit.html";
         }
 
+        //TODO: get set prices
+        Double dummyPrice = 45.55;
+        visit.setPrice(dummyPrice);
+
         this.visitService.createVisit(this.mapper.map(visit, VisitsCreateDTO.class));
         return "redirect:/visits";
     }
-
-//    private void getUserAuthentication() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String username = authentication.getName();
-//        userId = this.userService.getUserId(username);
-//    }
 
     private VisitsViewModel convertToVisitViewModel(VisitsDTO visit) {
         return this.mapper.map(visit, VisitsViewModel.class);
