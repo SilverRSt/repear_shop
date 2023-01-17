@@ -1,7 +1,9 @@
 package com.example.repear_shop.controller;
 
 import com.example.repear_shop.data.entity.Visit;
+import com.example.repear_shop.dto.VisitsCreateDTO;
 import com.example.repear_shop.service.VisitService;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +12,11 @@ import java.util.List;
 @RequestMapping("/api/visits")
 public class VisitController {
     private final VisitService service;
+    private final ModelMapper mapper;
 
-    public VisitController(VisitService service) {
+    public VisitController(VisitService service, ModelMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping
@@ -22,7 +26,7 @@ public class VisitController {
 
     @PostMapping
     public Visit createVisit(@RequestBody Visit visit) {
-        return this.service.createVisit(visit);
+        return this.service.createVisit(this.mapper.map(visit, VisitsCreateDTO.class));
     }
 
     @PutMapping("/{id}")

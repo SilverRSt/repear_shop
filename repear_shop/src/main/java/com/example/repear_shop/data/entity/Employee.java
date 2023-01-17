@@ -23,7 +23,7 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employeeId")
     @JsonIgnoreProperties({"visits", "users", "roles", "userId", "roleId", "model", "person", "brand", "employeeId", "qualificationId", "visitId", "clientId", "visits", "services", "repairShops", "serviceId", "qualifications", "repairShopId", "employee_id", "vin"})
-    private List<Visit> visitList;
+    private List<Visit> visitListEmployee;
 
     @ManyToMany(mappedBy = "employees") //name of list from qualification
     @JsonIgnoreProperties({"visits", "users", "roles", "userId", "roleId", "model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId", "qualifications", "employee_id", "vin"})

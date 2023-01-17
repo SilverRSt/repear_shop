@@ -1,12 +1,10 @@
 package com.example.repear_shop.web.view.controller;
 
-import com.example.repear_shop.data.entity.EndUser;
-import com.example.repear_shop.data.entity.RepairShop;
-import com.example.repear_shop.data.entity.Visit;
+import com.example.repear_shop.data.entity.*;
+import com.example.repear_shop.dto.VisitsCreateDTO;
 import com.example.repear_shop.dto.VisitsDTO;
-import com.example.repear_shop.service.MVService;
-import com.example.repear_shop.service.UserService;
-import com.example.repear_shop.service.VisitService;
+import com.example.repear_shop.service.*;
+import com.example.repear_shop.web.view.model.visits.VisitsCreateViewModel;
 import com.example.repear_shop.web.view.model.visits.VisitsViewModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -14,10 +12,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,9 @@ import java.util.stream.Collectors;
 public class VisitsViewController {
     private final MVService mvService;
     private final UserService userService;
+    private final PersonService personService;
+    private final EmployeeService employeeService;
+    private final ServiceTypeService serviceTypeService;
 
     private final VisitService visitService;
     private final ModelMapper mapper;
@@ -68,8 +72,33 @@ public class VisitsViewController {
 //        EndUser user = (EndUser) authentication.getPrincipal();
 //        long userId = user.getUserId();
 
-        model.addAttribute("userId").addAttribute(userId);
+        model.addAttribute("userId", userId);
+
+        //get user MV`s
+        List<MV> userMvs = this.personService.getAllMVsForPersonById(userId);
+        model.addAttribute("mvs", userMvs);
+
+        //TODO: get employees ? || choose repair shop -> at random employee assigned ?
+        List<Employee> employees = this.employeeService.getEmployees();
+        model.addAttribute("employees", employees);
+
+        //TODO: get services
+        List<ServiceType> serviceTypes = this.serviceTypeService.getServiceTypes();
+        model.addAttribute("services", serviceTypes);
+
+        model.addAttribute("visit", new VisitsCreateViewModel());
+
         return "/visits/create-visit.html";
+    }
+
+    @PostMapping("/create")
+    public String createVisit(@Valid @ModelAttribute("visit") VisitsCreateViewModel visit, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "/visits/create-visit.html";
+        }
+
+        this.visitService.createVisit(this.mapper.map(visit, VisitsCreateDTO.class));
+        return "redirect:/visits";
     }
 
 //    private void getUserAuthentication() {

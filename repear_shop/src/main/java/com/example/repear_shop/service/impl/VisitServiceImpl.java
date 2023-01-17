@@ -2,6 +2,7 @@ package com.example.repear_shop.service.impl;
 
 import com.example.repear_shop.data.entity.Visit;
 import com.example.repear_shop.data.repository.VisitRepository;
+import com.example.repear_shop.dto.VisitsCreateDTO;
 import com.example.repear_shop.dto.VisitsDTO;
 import com.example.repear_shop.service.VisitService;
 import org.modelmapper.ModelMapper;
@@ -27,8 +28,9 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
-    public Visit createVisit(Visit visit) {
-        return this.repository.save(visit);
+    public Visit createVisit(VisitsCreateDTO visit) {
+//        return this.repository.save(visit);
+        return this.repository.save(this.mapper.map(visit, Visit.class));
     }
 
     @Override

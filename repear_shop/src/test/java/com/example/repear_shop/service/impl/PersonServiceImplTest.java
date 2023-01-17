@@ -25,6 +25,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -164,11 +165,21 @@ public class PersonServiceImplTest {
 //        person.setPhoneNumber(this.personOne.getPhoneNumber());
 //        this.service.createPerson(person);
 //
-//        Person createdPerson = this.service.getPersonById(Long.parseLong("1"));
+//        PersonCreateDTO personV2 = new PersonCreateDTO();
+//        personV2.setUsername(this.personTwo.getUsername());
+//        personV2.setPassword(this.personTwo.getPassword());
+//        personV2.setFirstName(this.personTwo.getFirstName());
+//        personV2.setLastName(this.personTwo.getLastName());
+//        personV2.setPhoneNumber(this.personTwo.getPhoneNumber());
+//        this.service.createPerson(personV2);
 //
-//        assertEquals(person.getFirstName(), createdPerson.getFirstName());
+//        //Person createdPerson = this.service.getPersonById(Long.parseLong("1"));
+//        //assertEquals(person.getFirstName(), createdPerson.getFirstName());
 //
-//        //this.service.deletePerson(1);
+//        this.service.deletePerson(Long.parseLong("1"));
+//
+//        List<PersonDTO> persons = this.service.getPersons();
+//        assertEquals(0, (int) persons.stream().filter(p -> p.getId() == 1).count());
     }
 
     private void setUpValues() {

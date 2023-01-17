@@ -35,7 +35,6 @@ public class Visit {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @NotNull
     private Double price;
 
     @ManyToMany(mappedBy = "visits")

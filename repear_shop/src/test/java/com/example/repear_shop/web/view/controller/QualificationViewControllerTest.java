@@ -13,8 +13,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -24,16 +26,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(QualificationViewController.class)
-//TODO: WRONG CLASS NEED TO BE THE API
+//TODO: WRONG CLASS NEED TO BE THE API SO NO AUTHORIZATION REQUIRED
 class QualificationViewControllerTest {
     @MockBean
     private QualificationService service;
 
-    @MockBean
+    @SpyBean
     private ModelMapper mapper;
 
     @Autowired
@@ -53,18 +56,18 @@ class QualificationViewControllerTest {
         this.qualificationTwo.setQualification("qualificationTwo");
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @WithMockUser(username = "admin", authorities = {"ADMIN"})
     @Test
     public void testGetQualifications() throws Exception {
-//        List<QualificationDTO> qualificationList = new ArrayList<>();
-//        qualificationList.add(this.qualificationOne);
-//        qualificationList.add(this.qualificationTwo);
-//
-//        Mockito.when(this.service.getQualifications()).thenReturn(qualificationList);
-//
-//        this.mockMvc.perform(MockMvcRequestBuilders.get("/qualifications/qualifications.html"))
-//                .andDo(print())
-//                .andExpect(status().isOk());
+        List<QualificationDTO> qualificationList = new ArrayList<>();
+        qualificationList.add(this.qualificationOne);
+        qualificationList.add(this.qualificationTwo);
+
+        Mockito.when(this.service.getQualifications()).thenReturn(qualificationList);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/qualifications"))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
 }

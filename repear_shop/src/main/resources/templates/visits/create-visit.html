@@ -13,27 +13,24 @@
         <div class="col-sm-7">
 
 
-            <form method="POST" action="#">
+            <form method="POST" th:action="@{/visits/create}" th:object="${visit}">
                 <div class="row g-3 mb-5">
                     <div class="col col-sm-6">
-                        <label for="mvVin">Vehicle</label>
-                    <select class="form-select" name="mvVin" id="mvVin">
-                        <option hidden disabled selected value="-1">MVs</option>
-                        <option value="dummyValue">dummyValue</option>
-                        <option value="dummyValue">dummyValue</option>
-                        <option value="dummyValue">dummyValue</option>
-                    </select>
+
+                        <select class="form-select" th:name="mvVin" id="mvVin" th:field="*{clientId}">
+                            <option hidden disabled selected value="-1">MVs</option>
+                            <option th:each="mv : ${mvs}" th:value="${mv.vin}" th:text="${mv.vin} + ' - ' + ${mv.model.model}"></option>
+                        </select>
+
                      </div>
                 </div>
 
                 <div class="row g-3 mb-5">
                     <div class="col col-sm-6">
                         <label for="employeeId">Employee</label>
-                        <select class="form-select" name="employeeId" id="employeeId">
+                        <select class="form-select" th:name="userId" id="employeeId" th:field="*{employeeId}">
                             <option hidden disabled selected value="-1">Employees</option>
-                            <option value="dummyValue">dummyValue</option>
-                            <option value="dummyValue">dummyValue</option>
-                            <option value="dummyValue">dummyValue</option>
+                            <option th:each="emp : ${employees}" th:value="${emp.userId}" th:text="${emp.firstName} + ' - ' + ${emp.lastName}"></option>
                         </select>
                     </div>
                 </div>
@@ -41,10 +38,23 @@
                 <div class="row g-3 mb-5">
                     <div class="col col-sm-6">
                         <label for="date">Date</label>
-                        <input class="form-control" type="date" id="date" required>
+                        <input class="form-control" type="date" id="date" th:name="date" th:field="*{date}" required>
                     </div>
                 </div>
 
+<!--                <div class="row g-3 mb-5">-->
+<!--                    <div class="col col-sm-6">-->
+<!--                        <label for="serviceId">Services</label>-->
+<!--                        <select class="form-select" th:name="serviceId" id="serviceId">-->
+<!--                            <option hidden disabled selected value="-1">Services</option>-->
+<!--                            <option th:each="ser : ${services}" th:value="${ser.serviceId}" th:text="${ser.service}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="text-center mb-3">
+                    <button class="btn btn-success fs-4" type="submit">Create</button>
+                </div>
             </form>
 
 
