@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @RequestMapping("/visits")
 public class VisitsViewController {
-    private final MVService mvService;
     private final UserService userService;
     private final PersonService personService;
     private final EmployeeService employeeService;
@@ -35,28 +34,22 @@ public class VisitsViewController {
     private final VisitService visitService;
     private final ModelMapper mapper;
 
-    //private Long userId;
-
     @GetMapping
     public String getVisits(Model model) {
-        //TODO: find which user is logged in
+        //find which user is logged in
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-//        EndUser user = (EndUser) authentication.getPrincipal();
-//        long userId = user.getUserId();
-
-        //TODO: get user id through username
+        //get user id through username
         String username = authentication.getName();
         Long userId = this.userService.getUserId(username);
 
-        //TODO: get all visits that have MV with owner with that id
-        // -> in list SERVICE HAS GET VISITS BY CLIENT ID
+        //get all visits that have MV with owner with that id
         List<VisitsViewModel> userVisits = this.visitService.getAllVisitsForClientDTO(userId)
                 .stream()
                 .map(this::convertToVisitViewModel)
                 .collect(Collectors.toList());
 
-        //TODO: pass the list to frontend
+        //pass the list to frontend
         model.addAttribute("visits", userVisits);
 
         return "/visits/visits.html";
@@ -67,21 +60,17 @@ public class VisitsViewController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = this.userService.getUserId(username);
-
-//        EndUser user = (EndUser) authentication.getPrincipal();
-//        long userId = user.getUserId();
-
         model.addAttribute("userId", userId);
 
         //get user MV`s
         List<MV> userMvs = this.personService.getAllMVsForPersonById(userId);
         model.addAttribute("mvs", userMvs);
 
-        //TODO: get employees ? || choose repair shop -> at random employee assigned ?
+        //get employees
         List<Employee> employees = this.employeeService.getEmployees();
         model.addAttribute("employees", employees);
 
-        //TODO: get services
+        //get services
         List<ServiceType> serviceTypes = this.serviceTypeService.getServiceTypes();
         model.addAttribute("services", serviceTypes);
 
@@ -96,8 +85,6 @@ public class VisitsViewController {
         if(bindingResult.hasErrors()) {
             return "/visits/create-visit.html";
         }
-
-//        List<ServiceType> allServices = this.serviceTypeService.getServiceTypes();
 
         List<ServiceType> services = new ArrayList<>();
         serviceIds.forEach(s -> {
