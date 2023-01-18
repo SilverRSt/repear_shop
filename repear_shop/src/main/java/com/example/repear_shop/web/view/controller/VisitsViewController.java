@@ -13,12 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -92,16 +91,34 @@ public class VisitsViewController {
     }
 
     @PostMapping("/create")
-    public String createVisit(@Valid @ModelAttribute("visit") VisitsCreateViewModel visit, BindingResult bindingResult) {
+    public String createVisit(@Valid @ModelAttribute("visit") VisitsCreateViewModel visit, BindingResult bindingResult,
+                              @RequestParam("serviceIds") List<Long> serviceIds) {
         if(bindingResult.hasErrors()) {
             return "/visits/create-visit.html";
         }
 
-        //TODO: get set prices
-        Double dummyPrice = 45.55;
-        visit.setPrice(dummyPrice);
+//        List<ServiceType> allServices = this.serviceTypeService.getServiceTypes();
 
-        this.visitService.createVisit(this.mapper.map(visit, VisitsCreateDTO.class));
+        List<ServiceType> services = new ArrayList<>();
+        serviceIds.forEach(s -> {
+            ServiceType service = this.serviceTypeService.getServiceById(s);
+            services.add(service);
+        });
+
+        visit.getServices().addAll(services);
+
+        double finalPrice = services.stream().mapToDouble(ServiceType::getPrice).sum();
+        visit.setPrice(Math.round(finalPrice * 100.0) / 100.0);
+
+        Visit createdVisit = this.visitService.createVisit(this.mapper.map(visit, VisitsCreateDTO.class));
+
+        //UPDATE THE OTHER SIDE OF THE MANY TO MANY -> ADD TO THE SERVICES
+        // SO THE TABLE visit_services CAN UPDATE ITSELF AS WELL!!!
+        services.forEach(s -> {
+            s.getVisits().add(createdVisit);
+            this.serviceTypeService.updateService(s.getServiceId(), s);
+        });
+
         return "redirect:/visits";
     }
 

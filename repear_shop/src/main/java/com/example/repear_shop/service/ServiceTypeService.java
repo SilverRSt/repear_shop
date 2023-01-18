@@ -6,6 +6,8 @@ import java.util.List;
 public interface ServiceTypeService {
     List<ServiceType> getServiceTypes();
 
+    ServiceType getServiceById(Long id);
+
     ServiceType createService(ServiceType serviceType);
 
     ServiceType updateService(Long id, ServiceType serviceType);

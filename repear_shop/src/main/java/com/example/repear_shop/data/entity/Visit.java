@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,6 +38,7 @@ public class Visit {
 
     private Double price;
 
+
     @ManyToMany(mappedBy = "visits")
     @JsonIgnoreProperties({"mvList", "services", "visits", "users", "roles", "userId", "roleId", "model", "person", "brand", "employeeId", "clientId", "qualificationId", "visitId", "repairShopId", "visits", "services", "repairShops", "serviceId", "vin"})
     private List<ServiceType> services;
@@ -44,5 +46,4 @@ public class Visit {
     public Visit(Long visitId) {
         this.visitId = visitId;
     }
-
 }

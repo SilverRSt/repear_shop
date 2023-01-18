@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,4 +30,12 @@ public class VisitsCreateViewModel {
     private Double price;
 
     private List<ServiceType> services;
+
+    public List<ServiceType> getServices() {
+        if(this.services == null) {
+            this.services = new ArrayList<>();
+        }
+
+        return services;
+    }
 }

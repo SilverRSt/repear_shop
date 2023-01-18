@@ -5,6 +5,7 @@ import com.example.repear_shop.data.repository.ServiceTypeRepository;
 import com.example.repear_shop.service.ServiceTypeService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -18,6 +19,15 @@ public class ServiceTypeServiceImpl implements ServiceTypeService {
     @Override
     public List<ServiceType> getServiceTypes() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public ServiceType getServiceById(Long id) {
+        try {
+            return this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        }catch (EntityNotFoundException ex) {
+            throw new EntityNotFoundException();
+        }
     }
 
     @Override

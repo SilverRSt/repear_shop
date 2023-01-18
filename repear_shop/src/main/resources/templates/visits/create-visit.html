@@ -47,10 +47,19 @@
 <!--                        <label for="serviceId">Services</label>-->
 <!--                        <select class="form-select" th:name="serviceId" id="serviceId">-->
 <!--                            <option hidden disabled selected value="-1">Services</option>-->
-<!--                            <option th:each="ser : ${services}" th:value="${ser.serviceId}" th:text="${ser.service}"></option>-->
+<!--                            <option th:each="ser : ${services}" th:value="${ser.serviceId}" th:text="${ser.service} + ' -> ' + ${ser.price}"></option>-->
 <!--                        </select>-->
 <!--                    </div>-->
 <!--                </div>-->
+
+                <div class="row g-3 mb-5">
+                    <div class="col col-sm-6">
+                        <div th:each="ser : ${services}" class="form-check">
+                            <input class="form-check-input" type="checkbox" name="serviceIds" th:value="${ser.serviceId}" id="serviceId">
+                            <label class="form-check-label" for="serviceId" th:text="${ser.service} + ' -> ' + ${ser.price}"></label>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="text-center mb-3">
                     <button class="btn btn-success fs-4" type="submit">Create</button>
