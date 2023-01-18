@@ -99,8 +99,7 @@ public class VisitsViewController {
 
         Visit createdVisit = this.visitService.createVisit(this.mapper.map(visit, VisitsCreateDTO.class));
 
-        //UPDATE THE OTHER SIDE OF THE MANY TO MANY -> ADD TO THE SERVICES
-        // SO THE TABLE visit_services CAN UPDATE ITSELF AS WELL!!!
+        //update other side of manyToMany
         services.forEach(s -> {
             s.getVisits().add(createdVisit);
             this.serviceTypeService.updateService(s.getServiceId(), s);
