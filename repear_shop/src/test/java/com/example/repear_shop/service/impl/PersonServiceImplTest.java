@@ -1,31 +1,24 @@
 package com.example.repear_shop.service.impl;
 
-import com.example.repear_shop.data.entity.MV;
 import com.example.repear_shop.data.entity.Person;
 import com.example.repear_shop.data.repository.MVRepository;
 import com.example.repear_shop.data.repository.PersonRepository;
 import com.example.repear_shop.dto.PersonCreateDTO;
 import com.example.repear_shop.dto.PersonDTO;
 import com.example.repear_shop.dto.PersonUpdateDTO;
-import com.example.repear_shop.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -119,42 +112,6 @@ public class PersonServiceImplTest {
         assertEquals(expectedPerson.getLastName(), actualPerson.getLastName());
         assertEquals(expectedPerson.getUsername(), actualPerson.getUsername());
     }
-
-    @Test
-    public void testAddMV() {
-//        MV mv = new MV();
-//        String vin = "vin";
-//        mv.setVin(vin);
-//        mv.setRegistrationPlate("registrationPlate");
-//        this.mvServices.createMV(mv);
-//
-//        Mockito.when(this.mvRepository.findOneByVin(vin)).thenReturn(mv);
-//
-//        PersonCreateDTO person = new PersonCreateDTO();
-//        person.setUsername(this.personOne.getUsername());
-//        person.setPassword(this.personOne.getPassword());
-//        person.setFirstName(this.personOne.getFirstName());
-//        person.setLastName(this.personOne.getLastName());
-//        person.setPhoneNumber(this.personOne.getPhoneNumber());
-//        this.service.createPerson(person);
-//
-//        Person person1 = new Person();
-//        person1.setUsername(this.personOne.getUsername());
-//        person1.setPassword(this.personOne.getPassword());
-//        person1.setFirstName(this.personOne.getFirstName());
-//        person1.setLastName(this.personOne.getLastName());
-//        person1.setPhoneNumber(this.personOne.getPhoneNumber());
-//        person1.setMvList(new ArrayList<>());
-//        Mockito.when(this.repository.getReferenceById(1L)).thenReturn(person1);
-//
-//        this.service.addMV(1, vin);
-//
-//
-//        Person actualPerson = this.service.getPersonById(1L);
-//        assertFalse(actualPerson.getMvList().isEmpty());
-//        assertEquals(vin, actualPerson.getMvList().get(0).getVin());
-    }
-
 
     private void setUpValues() {
         this.personOne.setUsername("userOne");
